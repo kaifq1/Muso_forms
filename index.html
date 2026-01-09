@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuSo - Get Involved</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --muso-cyan: #00ADEF;
+            --muso-yellow: #FFF200;
+            --muso-pink: #EC008C;
+            --muso-dark: #231F20;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f8f8;
+            color: var(--muso-dark);
+            background-image: radial-gradient(var(--muso-cyan) 1px, transparent 0), radial-gradient(var(--muso-pink) 1px, transparent 0);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .muso-card {
+            background: white;
+            border: 4px solid var(--muso-dark);
+            box-shadow: 10px 10px 0px var(--muso-dark);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+        }
+
+        .muso-input {
+            border: 3px solid var(--muso-dark);
+            border-radius: 12px;
+            padding: 12px 16px;
+            width: 100%;
+            transition: all 0.2s;
+            outline: none;
+            font-weight: 600;
+        }
+
+        .muso-input:focus {
+            box-shadow: 4px 4px 0px var(--muso-cyan);
+            transform: translate(-2px, -2px);
+        }
+
+        .btn-primary {
+            background: var(--muso-cyan);
+            color: white;
+            border: 3px solid var(--muso-dark);
+            padding: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-radius: 12px;
+            box-shadow: 4px 4px 0px var(--muso-dark);
+            transition: all 0.1s;
+        }
+
+        .btn-primary:active {
+            box-shadow: 0px 0px 0px var(--muso-dark);
+            transform: translate(4px, 4px);
+        }
+
+        .dice-container {
+            border: 3px dashed var(--muso-dark);
+            border-radius: 16px;
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .dice-box {
+            width: 60px;
+            height: 60px;
+            background: var(--muso-yellow);
+            border: 3px solid var(--muso-dark);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 0 auto 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .dice-box.rolling {
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg) scale(1.1); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .activity-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-top: 8px;
+            border: 2px solid var(--muso-dark);
+        }
+
+        #status-message {
+            display: none;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>      
+
+    <div class="muso-card p-6 md:p-8">
+        <div class="flex flex-col items-center mb-6">
+            <img src="MusologinSVG.svg" alt="MuSo Logo" class="h-16 mb-4"">
+            <h1 class="text-2xl font-black uppercase tracking-tight text-center">Join the Solution</h1>
+            <p class="text-sm font-semibold opacity-70">Empowering future changemakers</p>
+        </div>
+
+        <form id="musoForm" class="space-y-4">
+            <div>
+                <label class="block text-xs font-black uppercase mb-1">Full Name</label>
+                <input type="text" name="name" required class="muso-input" placeholder="Enter your name">
+            </div>
+
+            <div>
+                <label class="block text-xs font-black uppercase mb-1">Organization</label>
+                <input type="text" name="organization" required class="muso-input" placeholder="School or Company name">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-black uppercase mb-1">Email</label>
+                    <input type="email" name="email" required class="muso-input" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label class="block text-xs font-black uppercase mb-1">Phone <span class="text-gray-400">(Opt)</span></label>
+                    <input type="tel" name="phone" class="muso-input" placeholder="+91 ...">
+                </div>
+            </div>
+
+            <!-- Dice Component -->
+            <div class="dice-container">
+                <label class="block text-xs font-black uppercase mb-2">Your Daily Activity Dice</label>
+                <div id="dice" class="dice-box">?</div>
+                <input type="hidden" name="activity" id="activityInput">
+                <input type="hidden" name="dice_roll" id="diceRollInput">
+                
+                <div id="activityDisplay" class="font-bold text-sm min-h-[1.5rem] text-pink-600">
+                    Click the dice to see your mission!
+                </div>
+                <button type="button" id="rollBtn" class="mt-3 text-xs font-black underline hover:text-cyan-600">RE-ROLL DICE</button>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-primary w-full mt-4">
+                Send to MuSo
+            </button>
+
+            <div id="status-message"></div>
+        </form>
+    </div>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzt9pSw86N51XFp5Y25u9b5Vm2LPop7MfeE_aygxVgnAkcXrCWNG8IZLlT-8oEvc_MouQ/exec';
+
+        const activities = {
+            1: "Solution Sketching (Draw it out!)",
+            2: "Rapid Prototyping (Grab some cardboard!)",
+            3: "Community Mapping (Identify a local problem)",
+            4: "Elevator Pitch (Explain it in 30 seconds)",
+            5: "Resource Hunting (Find 3 recycled items)",
+            6: "Design Thinking Sprint (Brainstorm 10 ideas)"
+        };
+
+        const dice = document.getElementById('dice');
+        const activityDisplay = document.getElementById('activityDisplay');
+        const activityInput = document.getElementById('activityInput');
+        const diceRollInput = document.getElementById('diceRollInput');
+        const rollBtn = document.getElementById('rollBtn');
+        const form = document.getElementById('musoForm');
+        const statusMsg = document.getElementById('status-message');
+        const submitBtn = document.getElementById('submitBtn');
+
+        let isRolling = false;
+
+        function rollDice() {
+            if (isRolling) return;
+            isRolling = true;
+            dice.classList.add('rolling');
+            dice.innerText = "...";
+            activityDisplay.innerText = "Generating mission...";
+
+            setTimeout(() => {
+                const roll = Math.floor(Math.random() * 6) + 1;
+                dice.innerText = roll;
+                dice.classList.remove('rolling');
+                
+                const selectedActivity = activities[roll];
+                activityDisplay.innerText = selectedActivity;
+                activityInput.value = selectedActivity;
+                diceRollInput.value = roll;
+                isRolling = false;
+            }, 800);
+        }
+
+        dice.addEventListener('click', rollDice);
+        rollBtn.addEventListener('click', rollDice);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!activityInput.value) {
+                statusMsg.style.display = 'block';
+                statusMsg.style.background = '#FEE2E2';
+                statusMsg.style.color = '#B91C1C';
+                statusMsg.innerText = "Please roll the dice first!";
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "SENDING...";
+            statusMsg.style.display = 'none';
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Standard for many GAS setups
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                statusMsg.style.display = 'block';
+                statusMsg.style.background = '#DCFCE7';
+                statusMsg.style.color = '#15803D';
+                statusMsg.innerText = "SUCCESS! Your solution is on its way.";
+                form.reset();
+                dice.innerText = "?";
+                activityDisplay.innerText = "Click to roll again!";
+                activityInput.value = "";
+            } catch (error) {
+                console.error('Error:', error);
+                statusMsg.style.display = 'block';
+                statusMsg.style.background = '#FEE2E2';
+                statusMsg.style.color = '#B91C1C';
+                statusMsg.innerText = "Oops! Something went wrong. Check the console.";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "SEND TO MUSO";
+            }
+        });
+    </script>
+</body>
+</html>
