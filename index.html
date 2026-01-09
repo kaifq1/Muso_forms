@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MuSo - Get Involved</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --muso-cyan: #00ADEF;
             --muso-yellow: #FFF200;
             --muso-pink: #EC008C;
             --muso-dark: #231F20;
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -37,6 +43,74 @@
             width: 100%;
             max-width: 500px;
             overflow: hidden;
+            transition: all 0.3s ease;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-placeholder {
+            width: 150px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--muso-cyan), var(--muso-pink));
+            border: 3px solid var(--muso-dark);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            text-align: center;
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            font-size: 0.875rem;
+            font-weight: 600;
+            opacity: 0.7;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+
+        .optional {
+            color: #9ca3af;
         }
 
         .muso-input {
@@ -47,6 +121,8 @@
             transition: all 0.2s;
             outline: none;
             font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
         }
 
         .muso-input:focus {
@@ -64,124 +140,163 @@
             border-radius: 12px;
             box-shadow: 4px 4px 0px var(--muso-dark);
             transition: all 0.1s;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
         }
 
-        .btn-primary:active {
+        .btn-primary:hover:not(:disabled) {
+            background: #0095d1;
+        }
+
+        .btn-primary:active:not(:disabled) {
             box-shadow: 0px 0px 0px var(--muso-dark);
             transform: translate(4px, 4px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .dice-container {
             border: 3px dashed var(--muso-dark);
             border-radius: 16px;
             background: #fff;
-            padding: 20px;
+            padding: 1.5rem;
             text-align: center;
-            margin-top: 10px;
+            display: none;
+        }
+
+        .dice-container h2 {
+            font-size: 1.25rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--muso-cyan);
+            margin-bottom: 1rem;
         }
 
         .dice-box {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             background: var(--muso-yellow);
             border: 3px solid var(--muso-dark);
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            margin: 0 auto 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
+            margin: 0 auto 1rem;
+            user-select: none;
         }
 
-        .dice-box.rolling {
-            animation: shake 0.5s infinite;
+        .activity-text {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--muso-pink);
+            min-height: 2rem;
         }
 
-        @keyframes shake {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg) scale(1.1); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-10deg) scale(1.1); }
-            100% { transform: rotate(0deg); }
-        }
-
-        .activity-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            margin-top: 8px;
-            border: 2px solid var(--muso-dark);
+        .dice-footer {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            opacity: 0.5;
         }
 
         #status-message {
             display: none;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 8px;
+            margin-bottom: 1.25rem;
+            padding: 1rem;
+            border-radius: 12px;
             font-weight: 700;
             text-align: center;
+            border: 3px solid var(--muso-dark);
+        }
+
+        .hidden-form {
+            display: none;
+        }
+
+        .demo-notice {
+            background: #fff3cd;
+            border: 3px solid var(--muso-dark);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .demo-notice strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #856404;
         }
     </style>
 </head>
-<body>      
+<body>
 
-    <div class="muso-card p-6 md:p-8">
-        <div class="flex flex-col items-center mb-6">
-            <img src="MusologinSVG.svg" alt="MuSo Logo" class="h-16 mb-4"">
-            <h1 class="text-2xl font-black uppercase tracking-tight text-center">Join the Solution</h1>
-            <p class="text-sm font-semibold opacity-70">Empowering future changemakers</p>
+    <div class="muso-card">
+        <div class="header">
+                <img src="MusologinSVG.svg" alt="MuSo logo" style="width:180px;height:100px;object-fit:contain;display:block;">
+            <h1 id="mainTitle">Join the Solution</h1>
+            <p id="subTitle" class="subtitle">Empowering future changemakers</p>
         </div>
 
-        <form id="musoForm" class="space-y-4">
-            <div>
-                <label class="block text-xs font-black uppercase mb-1">Full Name</label>
-                <input type="text" name="name" required class="muso-input" placeholder="Enter your name">
+        <!-- Demo Mode Notice -->
+        <div id="demoNotice" class="demo-notice" style="display: none;">
+            <strong>⚠️ Demo Mode Active</strong>
+            Data won't be saved. Please configure your Google Script URL in the code.
+        </div>
+
+        <div id="status-message"></div>
+
+        <form id="musoForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required class="muso-input" placeholder="Enter your name">
             </div>
 
-            <div>
-                <label class="block text-xs font-black uppercase mb-1">Organization</label>
-                <input type="text" name="organization" required class="muso-input" placeholder="School or Company name">
+            <div class="form-group">
+                <label for="organization">Organization</label>
+                <input type="text" id="organization" name="organization" required class="muso-input" placeholder="School or Company name">
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-black uppercase mb-1">Email</label>
-                    <input type="email" name="email" required class="muso-input" placeholder="you@example.com">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required class="muso-input" placeholder="you@example.com">
                 </div>
-                <div>
-                    <label class="block text-xs font-black uppercase mb-1">Phone <span class="text-gray-400">(Opt)</span></label>
-                    <input type="tel" name="phone" class="muso-input" placeholder="+91 ...">
+                <div class="form-group">
+                    <label for="phone">Phone <span class="optional">(Optional)</span></label>
+                    <input type="tel" id="phone" name="phone" class="muso-input" placeholder="+91 ...">
                 </div>
             </div>
 
-            <!-- Dice Component -->
-            <div class="dice-container">
-                <label class="block text-xs font-black uppercase mb-2">Your Daily Activity Dice</label>
-                <div id="dice" class="dice-box">?</div>
-                <input type="hidden" name="activity" id="activityInput">
-                <input type="hidden" name="dice_roll" id="diceRollInput">
-                
-                <div id="activityDisplay" class="font-bold text-sm min-h-[1.5rem] text-pink-600">
-                    Click the dice to see your mission!
-                </div>
-                <button type="button" id="rollBtn" class="mt-3 text-xs font-black underline hover:text-cyan-600">RE-ROLL DICE</button>
-            </div>
-
-            <button type="submit" id="submitBtn" class="btn-primary w-full mt-4">
+            <button type="submit" id="submitBtn" class="btn-primary">
                 Send to MuSo
             </button>
-
-            <div id="status-message"></div>
         </form>
+
+        <!-- Result Component -->
+        <div id="diceSection" class="dice-container">
+            <h2>Your Assigned Mission</h2>
+            <div id="dice" class="dice-box">?</div>
+            <div id="activityDisplay" class="activity-text">
+                Picking your activity...
+            </div>
+            <p class="dice-footer">Ready to change the world?</p>
+        </div>
     </div>
 
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzt9pSw86N51XFp5Y25u9b5Vm2LPop7MfeE_aygxVgnAkcXrCWNG8IZLlT-8oEvc_MouQ/exec';
+        // ✅ Google Script URL configured
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNZNOJS3zIAtB-ezcj0ygrAP_TYWUlzC8B3WxKJvnOnb2yzHBIFWvrVc1Qikdw51L4xQ/exec';
 
         const activities = {
             1: "Solution Sketching (Draw it out!)",
@@ -192,50 +307,27 @@
             6: "Design Thinking Sprint (Brainstorm 10 ideas)"
         };
 
-        const dice = document.getElementById('dice');
-        const activityDisplay = document.getElementById('activityDisplay');
-        const activityInput = document.getElementById('activityInput');
-        const diceRollInput = document.getElementById('diceRollInput');
-        const rollBtn = document.getElementById('rollBtn');
+        // DOM Elements
         const form = document.getElementById('musoForm');
+        const diceSection = document.getElementById('diceSection');
+        const mainTitle = document.getElementById('mainTitle');
+        const subTitle = document.getElementById('subTitle');
         const statusMsg = document.getElementById('status-message');
         const submitBtn = document.getElementById('submitBtn');
+        const demoNotice = document.getElementById('demoNotice');
+        const dice = document.getElementById('dice');
+        const activityDisplay = document.getElementById('activityDisplay');
 
-        let isRolling = false;
-
-        function rollDice() {
-            if (isRolling) return;
-            isRolling = true;
-            dice.classList.add('rolling');
-            dice.innerText = "...";
-            activityDisplay.innerText = "Generating mission...";
-
-            setTimeout(() => {
-                const roll = Math.floor(Math.random() * 6) + 1;
-                dice.innerText = roll;
-                dice.classList.remove('rolling');
-                
-                const selectedActivity = activities[roll];
-                activityDisplay.innerText = selectedActivity;
-                activityInput.value = selectedActivity;
-                diceRollInput.value = roll;
-                isRolling = false;
-            }, 800);
+        // Check if in demo mode
+        const isPlaceholder = SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE';
+        
+        if (isPlaceholder) {
+            demoNotice.style.display = 'block';
         }
 
-        dice.addEventListener('click', rollDice);
-        rollBtn.addEventListener('click', rollDice);
-
+        // Form submission handler
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            if (!activityInput.value) {
-                statusMsg.style.display = 'block';
-                statusMsg.style.background = '#FEE2E2';
-                statusMsg.style.color = '#B91C1C';
-                statusMsg.innerText = "Please roll the dice first!";
-                return;
-            }
 
             submitBtn.disabled = true;
             submitBtn.innerText = "SENDING...";
@@ -245,30 +337,44 @@
             const data = Object.fromEntries(formData.entries());
 
             try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // Standard for many GAS setups
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
+                // Only send to Google Script if URL is configured
+                if (!isPlaceholder) {
+                    await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                }
 
+                // SUCCESS - Update UI
+                form.classList.add('hidden-form');
+                mainTitle.innerText = "You're in!";
+                subTitle.innerText = "Your journey starts now.";
+                demoNotice.style.display = 'none';
+                
                 statusMsg.style.display = 'block';
-                statusMsg.style.background = '#DCFCE7';
-                statusMsg.style.color = '#15803D';
-                statusMsg.innerText = "SUCCESS! Your solution is on its way.";
-                form.reset();
-                dice.innerText = "?";
-                activityDisplay.innerText = "Click to roll again!";
-                activityInput.value = "";
+                statusMsg.style.background = "var(--muso-yellow)"; 
+                statusMsg.style.color = '#000';
+                statusMsg.innerText = isPlaceholder ? "✓ Demo Complete (Not Saved)" : "✓ Registration Complete";
+
+                // Show mission assignment
+                diceSection.style.display = 'block';
+                
+                // Random roll 1-6
+                const roll = Math.floor(Math.random() * 6) + 1;
+                
+                dice.innerText = roll;
+                activityDisplay.innerText = activities[roll];
+
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Submission error:', error);
+                
                 statusMsg.style.display = 'block';
                 statusMsg.style.background = '#FEE2E2';
                 statusMsg.style.color = '#B91C1C';
-                statusMsg.innerText = "Oops! Something went wrong. Check the console.";
-            } finally {
+                statusMsg.innerText = "⚠️ Connection error. Please try again.";
+                
                 submitBtn.disabled = false;
                 submitBtn.innerText = "SEND TO MUSO";
             }
